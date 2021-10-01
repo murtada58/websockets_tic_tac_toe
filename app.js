@@ -141,9 +141,13 @@ websocket.onmessage = function (event) {
             {
                 console.log(data.board)
             }
+            else if (data.outcome == 'tie')
+            {
+                turn.textContent = "Tie, Click on any cell to restart"
+            }
             else
             {
-                turn.textContent = `You ${data.outcome}`
+                turn.textContent = `You ${data.outcome}, Click on any cell to restart`
             }
 
             break;

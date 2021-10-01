@@ -30,6 +30,8 @@ def update_event(game_id, user, turn):
 
     if GAMES[game_id]["outcome"] == False:
         return json.dumps({"type": "update", "board": board, "turn": turn, "outcome": "false"})
+    elif GAMES[game_id]["outcome"] == "tie":
+        return json.dumps({"type": "update", "board": board, "turn": turn, "outcome": "tie"})
     elif GAMES[game_id]["outcome"] == user:
         return json.dumps({"type": "update", "board": board, "turn": turn, "outcome": "won"})
     else:
@@ -193,8 +195,7 @@ async def game(websocket, path):
                 websockets.broadcast(USERS, game_event())
 
             elif data["action"] == "update":
-                full = [False if cell == "" else True for cell in GAMES[USERS_DATA[websocket]["game"]]["board"]]
-                if GAMES[USERS_DATA[websocket]["game"]]["outcome"] != False or all(full):
+                if GAMES[USERS_DATA[websocket]["game"]]["outcome"] != False:
                     GAMES[USERS_DATA[websocket]["game"]]["outcome"] = False
                     GAMES[USERS_DATA[websocket]["game"]]["board"] = [""]*9
                     for user in GAMES[USERS_DATA[websocket]["game"]]["users"]:
@@ -212,8 +213,9 @@ async def game(websocket, path):
                         print("this shouldnt be possible")
                     else:
                         GAMES[USERS_DATA[websocket]["game"]]["outcome"] = False
-                    
-                     
+                        full = [False if cell == "" else True for cell in GAMES[USERS_DATA[websocket]["game"]]["board"]]
+                        if all(full):
+                            GAMES[USERS_DATA[websocket]["game"]]["outcome"] = "tie"
                     
                     for user in GAMES[USERS_DATA[websocket]["game"]]["users"]:
                         if user != websocket:
