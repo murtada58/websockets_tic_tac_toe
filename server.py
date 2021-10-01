@@ -193,7 +193,8 @@ async def game(websocket, path):
                 websockets.broadcast(USERS, game_event())
 
             elif data["action"] == "update":
-                if GAMES[USERS_DATA[websocket]["game"]]["outcome"] != False:
+                full = [False if cell == "" else True for cell in GAMES[USERS_DATA[websocket]["game"]]["board"]]
+                if GAMES[USERS_DATA[websocket]["game"]]["outcome"] != False or all(full):
                     GAMES[USERS_DATA[websocket]["game"]]["outcome"] = False
                     GAMES[USERS_DATA[websocket]["game"]]["board"] = [""]*9
                     for user in GAMES[USERS_DATA[websocket]["game"]]["users"]:
