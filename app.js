@@ -1,9 +1,7 @@
-const DOMAIN =  "api.websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server
+const DOMAIN =  "websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server
 const PORT = "6789"
 
 let websocket = new WebSocket(`wss://${DOMAIN}:${PORT}/`);
-
-let board = [["","",""], ["","",""],["","",""]];
 
 const users = document.getElementById("user-count");
 const createGame = document.getElementById("create-game");

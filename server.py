@@ -235,7 +235,7 @@ key = "/etc/letsencrypt/live/websockettictactoe.co.uk/privkey.pem"
 ssl_context.load_cert_chain(cert, keyfile=key)
 
 async def main():
-    async with websockets.serve(game, SERVER_IP, PORT):
+    async with websockets.serve(game, SERVER_IP, PORT, ssl=ssl_context):
         await asyncio.Future()  # run forever
 
 
