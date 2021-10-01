@@ -3,9 +3,11 @@
 import asyncio
 import json
 import logging
+import pathlib
+import ssl
 import websockets
 
-SERVER_IP =  "176.58.109.37" # set to "localhost" or your servers ip if you want to host your own server
+SERVER_IP = "176.58.109.37" # set to "localhost" or your servers ip if you want to host your own server
 PORT = 6789
 
 logging.basicConfig()
@@ -227,6 +229,10 @@ async def game(websocket, path):
         websockets.broadcast(USERS, users_event())
         websockets.broadcast(USERS, game_event())
 
+ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+cert = "/etc/letsencrypt/live/websockettictactoe.co.uk/fullchain.pem"
+key = "/etc/letsencrypt/live/websockettictactoe.co.uk/privkey.pem"
+ssl_context.load_cert_chain(cert, keyfile=key)
 
 async def main():
     async with websockets.serve(game, SERVER_IP, PORT):

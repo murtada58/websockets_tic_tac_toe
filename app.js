@@ -1,7 +1,7 @@
-const SERVER_IP =  "176.58.109.37" // set to "127.0.0.1" or your servers ip if you want to host your own server
+const DOMAIN =  "api.websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server
 const PORT = "6789"
 
-let websocket = new WebSocket(`ws://${SERVER_IP}:${PORT}/`);
+let websocket = new WebSocket(`wss://${DOMAIN}:${PORT}/`);
 
 let board = [["","",""], ["","",""],["","",""]];
 
