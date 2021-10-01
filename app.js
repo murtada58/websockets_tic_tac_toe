@@ -124,7 +124,11 @@ websocket.onmessage = function (event) {
                 document.getElementById(i).textContent = data.board[i]
             }
 
-            if (data.turn == "you")
+            if (data.turn == "wait")
+            {
+                turn.textContent = "Waiting for someone to join"
+            }
+            else if (data.turn == "you")
             {
                 turn.textContent = "Your turn"
             }

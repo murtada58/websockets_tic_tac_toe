@@ -165,7 +165,7 @@ async def game(websocket, path):
                     USERS_DATA[websocket]["game"] = str(new_game_id)
                     new_game_id += 1
                     websockets.broadcast(USERS, game_event())
-                    await websocket.send(update_event(USERS_DATA[websocket]["game"], websocket, "you"))  
+                    await websocket.send(update_event(USERS_DATA[websocket]["game"], websocket, "wait"))  
                 else:
                     print(f"User tried to create new game when they are already in a game {websocket}")
 
