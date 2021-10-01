@@ -1,0 +1,122 @@
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #FFF;
+    display: grid;
+    height: 100vh;
+    margin: 0;
+    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-areas: 
+        "count"
+        "content"
+        "button";
+    text-align: center;
+}
+
+#page-title {
+    grid-area: title;
+}
+
+#user-count {
+    grid-area: count;
+}
+
+#lobbies {
+    display: block;
+    grid-area: content;
+    overflow-y: scroll;
+}
+
+.lobby {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+        "name users button";
+    margin: 0.25rem 1rem;
+    height: min-content;
+    border: 3.5px black solid;
+    border-radius: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.lobby > * {
+    padding: 0rem 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.lobby-name {
+    grid-area: name;
+    text-align: left;
+}
+
+.lobby-users {
+    grid-area: users;
+    text-align: center;
+}
+
+.lobby-button {
+    grid-area: button;
+    justify-self: right;
+}
+
+.active {
+    color: #000;
+}
+
+.active:hover {
+    color: #555;
+    cursor: pointer;
+}
+
+.inactive {
+    color: #AAA;
+}
+
+#game {
+    grid-area: content;
+    display: none;
+    grid-template-rows: 1fr 7fr;
+
+}
+
+table {
+    display: table;
+    border-collapse: collapse;
+    margin: 0 1rem;
+    width: 69vh;
+    justify-self: center;
+}
+
+td {
+    border: 3.5px solid #000;
+    font-size: 4.5rem;
+    width: 22vh;
+    height: 22vh;
+}
+
+td:hover {
+    background-color: #AAA;
+    cursor: pointer;
+}
+
+#create-game {
+    grid-area: button;
+    display: grid;
+    color: #000;
+    margin: 1rem;
+}
+
+#leave {
+    grid-area: button;
+    display: none;
+    color: #000;
+    margin: 1rem;
+}
+
+#create-game:hover, #leave:hover{
+    cursor: pointer;
+    color: #555;
+}
