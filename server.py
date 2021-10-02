@@ -173,7 +173,8 @@ async def game(websocket, path):
             data = json.loads(message)
             if data["action"] == "name_change":
                 USERS_DATA[websocket]["name"] = data["name"]
-            
+                await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"]}))
+                
             elif data["action"] == "message":
                 time = datetime.now().strftime('%I:%M:%p')
                 if data["chat"] == "general":

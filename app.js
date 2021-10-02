@@ -17,6 +17,7 @@ const gameChatInput = document.getElementById("game-chat-input");
 const usernameInput = document.getElementById("username");
 const usernameId = document.getElementById("user-id");
 
+let username = "Guest"
 usernameInput.value = username;
 
 for (i=0; i<9; i++)
@@ -45,7 +46,6 @@ leave.onclick = () => {
 usernameInput.onkeydown = function (event) {
     if (event.key == 'Enter')
     {
-        console.log(this.value)
         if (this.value.length <= 16)
         {
             websocket.send(JSON.stringify({action: 'name_change', name: this.value}));
@@ -120,13 +120,14 @@ function addLobby(lobbies, lobbyName, numberOfPlayers)
 function addMessage(chat, messasgeContent, name, serverTime, color)
 { 
     const messageName = document.createElement("p");
-    if (username + usernameId == name)
+    console.log(username)
+    if (username + usernameId.textContent == name)
     {
-        messageName.classList.add("message-name-stranger");
+        messageName.classList.add("message-name-user");
     }
     else 
     {
-        messageName.classList.add("message-name-user");
+        messageName.classList.add("message-name-stranger");
     }
 
     messageName.textContent = name;
@@ -182,7 +183,10 @@ websocket.onmessage = function (event) {
             break;
         
         case 'name':
-            usernameId.textContent = data.id
+            usernameId.textContent = data.id;
+            console.log(username)
+            username = data.name;
+            console.log(username)
             usernameInput.value = data.name;
             break;
 
