@@ -6,6 +6,8 @@ import logging
 import pathlib
 import ssl
 import websockets
+from datetime import datetime
+import random
 
 SERVER_IP = "176.58.109.37" # set to "localhost" or your servers ip if you want to host your own server
 PORT = 6789
@@ -17,6 +19,7 @@ USERS_DATA = {}
 GAMES = {}
 
 new_game_id = 1
+new_user_id = 1
 
 def update_event(game_id, user, turn):
     board = []
@@ -47,6 +50,9 @@ def game_event():
 
 def join_event(turn):
     return json.dumps({"type": "join", "turn": turn})
+
+def message_event(chat, message, name, time, color):
+    return json.dumps({"type": "message", "chat":chat, "message":message, "name":name, "time":time, "color":color})
 
 async def remove_from_game(websocket):
     if USERS_DATA[websocket]["game"] != None:
@@ -152,16 +158,32 @@ def won(user, board):
 
 
 async def game(websocket, path):
+    global new_game_id
+    global new_user_id
     try:
         USERS.add(websocket)
-        USERS_DATA[websocket] = {"game": None}
+        color = "#" + "".join(["0123456789ABCD"[random.randint(0, 13)] for _ in range(6)])
+        USERS_DATA[websocket] = {"game": None, "name": "Guest", "id": f"#{new_user_id}", "color": color}
+        new_user_id += 1
         websockets.broadcast(USERS, users_event())
         await websocket.send(game_event())
+        await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"]}))
 
-        global new_game_id
         async for message in websocket:
             data = json.loads(message)
-            if data["action"] == "create":
+            if data["action"] == "name_change":
+                USERS_DATA[websocket]["name"] = data["name"]
+            
+            elif data["action"] == "message":
+                time = datetime.now().strftime('%I:%M:%p')
+                if data["chat"] == "general":
+                    websockets.broadcast(USERS, message_event(data["chat"], data["message"], USERS_DATA[websocket]["name"] + USERS_DATA[websocket]["id"], time, USERS_DATA[websocket]["color"]))
+                else:
+                    if USERS_DATA[websocket]["game"] != None:
+                        for user in GAMES[USERS_DATA[websocket]["game"]]["users"]:
+                            await user.send(message_event(data["chat"], data["message"], USERS_DATA[websocket]["name"] + USERS_DATA[websocket]["id"], time, USERS_DATA[websocket]["color"]))  
+
+            elif data["action"] == "create":
                 if USERS_DATA[websocket]["game"] == None:
                     GAMES[str(new_game_id)] = {"users": {websocket}, "board": [""]*9, "turn": websocket, "outcome": False}
                     USERS_DATA[websocket]["game"] = str(new_game_id)

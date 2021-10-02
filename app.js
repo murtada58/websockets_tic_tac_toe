@@ -1,7 +1,7 @@
-const DOMAIN =  "websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server
+const DOMAIN =  "websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server you will need to change wss to ws as well unless you have a certificate
 const PORT = "6789"
 
-let websocket = new WebSocket(`wss://${DOMAIN}:${PORT}/`);
+let websocket = new WebSocket(`ws://${DOMAIN}:${PORT}/`);
 
 const users = document.getElementById("user-count");
 const createGame = document.getElementById("create-game");
@@ -10,6 +10,14 @@ const games = document.getElementById("active-games")
 const lobbies = document.getElementById("lobbies");
 const game = document.getElementById("game");
 const turn = document.getElementById("turn");
+const generalChatMessages = document.getElementById("general-chat-messages");
+const generalChatInput = document.getElementById("general-chat-input");
+const gameChatMessages = document.getElementById("game-chat-messages");
+const gameChatInput = document.getElementById("game-chat-input");
+const usernameInput = document.getElementById("username");
+const usernameId = document.getElementById("user-id");
+
+usernameInput.value = username;
 
 for (i=0; i<9; i++)
 {
@@ -32,6 +40,40 @@ leave.onclick = () => {
     game.style.display = "none"
     createGame.style.display = "grid"
     leave.style.display = "none"
+}
+
+usernameInput.onkeydown = function (event) {
+    if (event.key == 'Enter')
+    {
+        console.log(this.value)
+        if (this.value.length <= 16)
+        {
+            websocket.send(JSON.stringify({action: 'name_change', name: this.value}));
+            alert(`username changed to ${this.value}`)
+        }
+        else
+        {
+            alert("Please choose a name no longer than 16 characters")
+        }
+    }
+}
+
+generalChatInput.onkeydown = function (event) {
+    if (event.key == 'Enter')
+    {
+        console.log(this.value)
+        websocket.send(JSON.stringify({action: 'message', chat:"general", message: this.value}));
+        this.value = ""
+    }
+}
+
+gameChatInput.onkeydown = function (event) {
+    if (event.key == 'Enter')
+    {
+        console.log(this.value)
+        websocket.send(JSON.stringify({action: 'message', chat:"game", message: this.value}));
+        this.value = ""
+    }
 }
 
 function addLobby(lobbies, lobbyName, numberOfPlayers)
@@ -75,6 +117,47 @@ function addLobby(lobbies, lobbyName, numberOfPlayers)
     lobbies.appendChild(lobby);
 }
 
+function addMessage(chat, messasgeContent, name, time, color)
+{ 
+    const messageName = document.createElement("p");
+    if (username + usernameId == name)
+    {
+        messageName.classList.add("message-name-stranger");
+    }
+    else 
+    {
+        messageName.classList.add("message-name-user");
+    }
+
+    messageName.textContent = name;
+    messageName.style.color = color;
+
+    const message = document.createElement("p");
+    message.classList.add("message");
+    message.textContent = messasgeContent;
+
+    const messageTime = document.createElement("p");
+    messageTime.classList.add("message-time");
+    messageTime.textContent = time;
+
+    const messageContainer = document.createElement("div");
+    messageContainer.classList.add("message-container");
+    messageContainer.appendChild(messageName);
+    messageContainer.appendChild(message);
+    messageContainer.appendChild(messageTime);
+
+    if (chat == "general")
+    {
+        generalChatMessages.appendChild(messageContainer)
+        generalChatMessages.scrollTop = generalChatMessages.scrollHeight
+    }
+    else
+    {
+        gameChatMessages.appendChild(messageContainer)
+        gameChatMessages.scrollTop = gameChatMessages.scrollHeight
+    }
+}
+
 function clearLobbies(lobbies)
 {
     while (lobbies.lastChild) {
@@ -84,24 +167,47 @@ function clearLobbies(lobbies)
 
 websocket.onmessage = function (event) {
     data = JSON.parse(event.data);
+    const empty_message = document.createElement("h3")
     switch (data.type) {
+        case 'id':
+            
+
+            break;
+
         case 'users':
             users.textContent = (
                 data.count.toString() + " user" +
                 (data.count == 1 ? "" : "s") + " currently online");
             break;
+        
+        case 'name':
+            usernameId.textContent = data.id
+            usernameInput.value = data.name;
+            break;
 
         case 'lobby':
             clearLobbies(lobbies);
+            let number_of_lobbies = 0;
             for (const [key, value] of Object.entries(data.lobbies))
             {
-                addLobby(lobbies, key, value)
+                number_of_lobbies++;
+                addLobby(lobbies, key, value);
             }
+            if (number_of_lobbies == 0)
+            {
+                const empty_message = document.createElement("h3")
+                empty_message.textContent = "There are currently no active games"
+                lobbies.appendChild(empty_message)
+            }
+            break;
+        
+        case 'message':
+            addMessage(data.chat, data.message, data.name, data.time, data.color);
             break;
 
         case 'join':
             console.log("joined")
-            lobbies.style.display = "none"
+            games.style.display = "none"
             game.style.display = "grid"
             createGame.style.display = "none"
             leave.style.display = "grid"
@@ -113,10 +219,17 @@ websocket.onmessage = function (event) {
             {
                 turn.textContent = "Enemy turn"
             }
+            
+            empty_message.textContent = "Enemy Joined"
+            gameChatMessages.appendChild(empty_message)
+            gameChatMessages.scrollTop = gameChatMessages.scrollHeight
             break;
             
         case 'enemy_leave':
             turn.textContent = "Enemy Left the game wait for someone else to join"
+            empty_message.textContent = "Enemy left"
+            gameChatMessages.appendChild(empty_message)
+            gameChatMessages.scrollTop = gameChatMessages.scrollHeight
             break;
 
         case 'update':

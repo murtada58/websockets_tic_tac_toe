@@ -10,55 +10,168 @@ body {
     grid-template-columns: 4fr 8fr;
     grid-template-rows: 1fr 8fr 1fr;
     grid-template-areas: 
-        "count count"
+        "topbar topbar"
         "chat content"
         "button button";
     text-align: center;
     grid-gap: 1rem;
 }
 
+#topbar {
+    grid-area: topbar;
+    display: grid;
+    grid-template-areas: 
+        "count user";
+    border-bottom: #000 2px solid;
+    margin: 0;
+}
+
 #user-count {
     grid-area: count;
-    border-bottom: #000 2px solid;
-    margin: 0;
     padding: 1rem;
-}
-
-#general-chat {
-    grid-area: chat;
-    border: #000 2px solid;
-    border-radius: 2rem;
-    margin-left: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.chat-title {
-    border-bottom: #000 2px solid;
     margin: 0;
-    padding: 0.5rem;
+    margin-left: 1rem;
+    justify-self: left;
 }
 
-#active-games {
-    grid-area: content;
-    display: block;
-    grid-template-rows: 1fr auto;
+#user {
+    grid-area: user;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    margin: 0;
+    align-items: center;
+}
+
+#username {
+    display: inline-block;
+    margin: 0;
+    width: 18rem;
+    font-size: 2rem;
+    text-align: right;
+    justify-self: end;
+}
+
+#user-id {
+    display: inline-block;
+    margin: 0%;
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
+.containers {
+    max-height: 74vh;
+    display: grid;
+    grid-template-rows: 1fr 9fr;
     border: #000 2px solid;
-    border-radius: 2rem 0 0 2rem;
-    margin-right: 1rem;
+    border-radius: 2rem 2rem 0 2rem;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#active-games-title {
+.title {
     border-bottom: #000 2px solid;
     margin: 0;
     padding: 0.5rem;
     height: min-content;
 }
 
-#lobbies {
+.contents {
     display: block;
     overflow-y: scroll;
-    height: 10rem;
+}
+
+#general-chat {
+    grid-area: chat;
+    grid-template-areas: 
+        "general-title"
+        "general-messages"
+        "general-input";
+    margin-left: 1rem;
+}
+
+#general-chat-title {
+    grid-area: general-title;
+}
+
+#general-chat-messages {
+    grid-area: general-messages;
+    display: block;
+}
+
+.message-container {
+    display: grid;
+    grid-template-areas: 
+        "name name"
+        "message time";
+    border: #000 2px solid;
+    border-radius: 1rem 1rem 1rem 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: min-content;
+    margin: 1rem;
+    text-align: left;
+}
+
+.message-name-stranger {
+    grid-area: name;
+    color: blue;
+    padding: 0.5rem;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.message-name-user {
+    grid-area: name;
+    color: red;
+    text-align: right;
+    padding: 0.5rem;
+    padding-bottom: 0;
+    margin: 0;
+}
+
+.message {
+    grid-area: message;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-top: 0;
+    margin: 0;
+    overflow-x: auto;
+    overflow-wrap: break-word;
+}
+
+.message-time {
+    grid-area: time;
+    color: #AAA;
+    padding: 0.5rem;
+    padding-top: 0;
+    margin: 0;
+    text-align: right;
+    align-self: end;
+}
+
+#general-chat-input {
+    grid-area: general-input;
+    font-size: 1rem;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    border: none;
+    border-top: #000 2px solid;
+    border-radius: 0 0 0 2rem;
+    outline: none;
+}
+
+#active-games {
+    grid-area: content;
+    grid-template-areas: 
+        "lobby-title"
+        "lobby-content";
+    margin-right: 1rem;
+}
+
+#active-games-title {
+    grid-area: lobby-title;
+}
+
+#lobbies {
+    grid-area: lobby-content;
 }
 
 .lobby {
@@ -77,6 +190,7 @@ body {
     padding: 0rem 1rem;
     font-size: 1.5rem;
     font-weight: bold;
+    align-self: center;
 }
 
 .lobby-name {
@@ -119,6 +233,7 @@ body {
 
 #turn {
     grid-area: info;
+    height: min-content;
 }
 
 table {
@@ -132,8 +247,8 @@ table {
 td {
     border: 3.5px solid #000;
     font-size: 4.5rem;
-    width: 20vh;
-    height: 20vh;
+    width: 10vw;
+    height: 10vw;
 }
 
 td:hover {
@@ -141,12 +256,34 @@ td:hover {
     cursor: pointer;
 }
 
+
 #game-chat {
     grid-area: game-chat;
-    border: #000 2px solid;
-    border-radius: 2rem;
+    grid-template-areas: 
+        "game-title"
+        "game-messages"
+        "game-input";
     margin-left: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#game-chat-title {
+    grid-area: game-title;
+}
+
+#game-chat-messages {
+    grid-area: game-messages;
+    display: block;
+}
+
+#game-chat-input {
+    grid-area: game-input;
+    font-size: 1rem;
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    border: none;
+    border-top: #000 2px solid;
+    border-radius: 0 0 0 2rem;
+    outline: none;
 }
 
 #create-game, #leave {
@@ -165,4 +302,76 @@ td:hover {
 #create-game:hover, #leave:hover{
     cursor: pointer;
     color: #555;
+}
+
+@media only screen and (max-width: 850px) {
+
+    body {
+        background-color: #FFF;
+        display: grid;
+        height: 100vh;
+        margin: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 8fr 1fr;
+        grid-template-areas: 
+            "topbar"
+            "content"
+            "button";
+        text-align: center;
+        grid-gap: 1rem;
+    }
+
+    #topbar {
+        grid-area: topbar;
+        display: grid;
+        grid-template-areas: 
+            "count";
+        border-bottom: #000 2px solid;
+        margin: 0;
+    }
+
+    
+    #active-games {
+        grid-area: content;
+        grid-template-areas: 
+            "lobby-title"
+            "lobby-content";
+        margin: 0 1rem;
+        border-radius: 2rem;
+    }
+    
+    .lobby > * {
+        padding: 0rem 1rem;
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    #game {
+        grid-area: content;
+        display: none;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "info"
+            "game";
+        margin: 0 1rem;
+    }
+
+    #user {
+        display: none;
+    }
+
+    #general-chat {
+        display: none;
+    }
+    
+    #game-chat {
+        display: none;
+    }
+    
+    td {
+        border: 3.5px solid #000;
+        font-size: 4.5rem;
+        width: 25vw;
+        height: 25vw;
+    }
 }
