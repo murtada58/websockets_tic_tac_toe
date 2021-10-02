@@ -7,22 +7,58 @@ body {
     display: grid;
     height: 100vh;
     margin: 0;
+    grid-template-columns: 4fr 8fr;
     grid-template-rows: 1fr 8fr 1fr;
     grid-template-areas: 
-        "count"
-        "content"
-        "button";
+        "count count"
+        "chat content"
+        "button button";
     text-align: center;
+    grid-gap: 1rem;
 }
 
 #user-count {
     grid-area: count;
+    border-bottom: #000 2px solid;
+    margin: 0;
+    padding: 1rem;
+}
+
+#general-chat {
+    grid-area: chat;
+    border: #000 2px solid;
+    border-radius: 2rem;
+    margin-left: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.chat-title {
+    border-bottom: #000 2px solid;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+#active-games {
+    grid-area: content;
+    display: block;
+    grid-template-rows: 1fr auto;
+    border: #000 2px solid;
+    border-radius: 2rem 0 0 2rem;
+    margin-right: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#active-games-title {
+    border-bottom: #000 2px solid;
+    margin: 0;
+    padding: 0.5rem;
+    height: min-content;
 }
 
 #lobbies {
     display: block;
-    grid-area: content;
     overflow-y: scroll;
+    height: 10rem;
 }
 
 .lobby {
@@ -30,7 +66,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas: 
         "name users button";
-    margin: 0.25rem 1rem;
+    margin: 0.5rem 1rem;
     height: min-content;
     border: 3.5px black solid;
     border-radius: 1rem;
@@ -74,23 +110,30 @@ body {
 #game {
     grid-area: content;
     display: none;
-    grid-template-rows: 1fr 7fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+        "info game-chat"
+        "game game-chat";
+    margin-right: 1rem;
+}
 
+#turn {
+    grid-area: info;
 }
 
 table {
+    grid-area: game;
     display: table;
     border-collapse: collapse;
-    margin: 0 1rem;
-    width: 69vh;
-    justify-self: center;
+    margin: auto;
+    margin-top: 0;
 }
 
 td {
     border: 3.5px solid #000;
     font-size: 4.5rem;
-    width: 22vh;
-    height: 22vh;
+    width: 20vh;
+    height: 20vh;
 }
 
 td:hover {
@@ -98,18 +141,25 @@ td:hover {
     cursor: pointer;
 }
 
-#create-game {
+#game-chat {
+    grid-area: game-chat;
+    border: #000 2px solid;
+    border-radius: 2rem;
+    margin-left: 1rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#create-game, #leave {
     grid-area: button;
     display: grid;
     color: #000;
-    margin: 1rem 0;
+    border-top: #000 2px solid;
+    margin: 0;
+    padding: 1rem;
 }
 
 #leave {
-    grid-area: button;
     display: none;
-    color: #000;
-    margin: 1rem 0;
 }
 
 #create-game:hover, #leave:hover{

@@ -6,6 +6,7 @@ let websocket = new WebSocket(`wss://${DOMAIN}:${PORT}/`);
 const users = document.getElementById("user-count");
 const createGame = document.getElementById("create-game");
 const leave = document.getElementById("leave");
+const games = document.getElementById("active-games")
 const lobbies = document.getElementById("lobbies");
 const game = document.getElementById("game");
 const turn = document.getElementById("turn");
@@ -19,7 +20,7 @@ for (i=0; i<9; i++)
 }
 createGame.onclick = () => {
     websocket.send(JSON.stringify({action: 'create'}));
-    lobbies.style.display = "none"
+    games.style.display = "none"
     game.style.display = "grid"
     createGame.style.display = "none"
     leave.style.display = "grid"
@@ -27,7 +28,7 @@ createGame.onclick = () => {
 
 leave.onclick = () => {
     websocket.send(JSON.stringify({action: 'leave'}));
-    lobbies.style.display = "block"
+    games.style.display = "grid"
     game.style.display = "none"
     createGame.style.display = "grid"
     leave.style.display = "none"
