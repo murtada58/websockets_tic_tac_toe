@@ -117,7 +117,7 @@ function addLobby(lobbies, lobbyName, numberOfPlayers)
     lobbies.appendChild(lobby);
 }
 
-function addMessage(chat, messasgeContent, name, time, color)
+function addMessage(chat, messasgeContent, name, serverTime, color)
 { 
     const messageName = document.createElement("p");
     if (username + usernameId == name)
@@ -138,7 +138,8 @@ function addMessage(chat, messasgeContent, name, time, color)
 
     const messageTime = document.createElement("p");
     messageTime.classList.add("message-time");
-    messageTime.textContent = time;
+    const localTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric', hour12: true}).format(new Date())
+    messageTime.textContent = localTime;
 
     const messageContainer = document.createElement("div");
     messageContainer.classList.add("message-container");
