@@ -1,7 +1,7 @@
 const DOMAIN =  "websockettictactoe.co.uk" // set to "127.0.0.1" or your servers ip if you want to host your own server you will need to change wss to ws as well unless you have a certificate
 const PORT = "6789"
 
-let websocket = new WebSocket(`ws://${DOMAIN}:${PORT}/`);
+let websocket = new WebSocket(`wss://${DOMAIN}:${PORT}/`);
 
 const users = document.getElementById("user-count");
 const createGame = document.getElementById("create-game");
