@@ -372,10 +372,10 @@ body #game #tictactoe #game-board {
 body #game #tictactoe #game-board div {
   display: -ms-grid;
   display: grid;
-  width: calc((((100vw - 4rem) / 3) - 4rem) / 5);
-  height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
-  font-size: calc((((100vw - 4rem) / 3) - 4rem) / 5);
-  line-height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+  width: calc((((100vw - 4rem) / 3) - 4rem) / 4);
+  height: calc((((100vw - 4rem) / 3) - 4rem) / 4);
+  font-size: calc((((100vw - 4rem) / 3) - 4rem) / 4);
+  line-height: calc((((100vw - 4rem) / 3) - 4rem) / 4);
   border-radius: 1rem;
   margin: 0.5rem;
 }
@@ -398,7 +398,7 @@ body #game #game-chat {
   grid-area: game-chat;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1150px) {
   body {
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
