@@ -410,6 +410,11 @@ body #game #game-chat {
         grid-template-columns: 1fr;
         grid-template-areas: "topbar" "content";
   }
+  body #topbar {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: topbar;
+  }
   body #topbar #topbar-right {
     display: none;
   }
@@ -417,9 +422,17 @@ body #game #game-chat {
     display: none;
   }
   body #game {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: content;
     -ms-grid-columns: 1fr;
         grid-template-columns: 1fr;
         grid-template-areas: "game";
+  }
+  body #game #tictactoe {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    grid-area: game;
   }
   body #game #tictactoe #game-board div {
     width: calc((100vw - 8rem) / 5);

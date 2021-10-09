@@ -349,7 +349,7 @@ body {
         "content";
     
         #topbar {
-            
+            grid-area: topbar;
             #topbar-right {
                 display: none;
             }
@@ -360,10 +360,12 @@ body {
         }
 
         #game {
+            grid-area: content;
             grid-template-columns: 1fr;
             grid-template-areas: "game";
 
             #tictactoe {
+                grid-area: game;
                 #game-board {
                     div {
                         width: calc((100vw - 8rem) / 5);
