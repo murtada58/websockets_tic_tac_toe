@@ -19,10 +19,20 @@ const usernameId = document.getElementById("user-id");
 const settingsButton1 = document.getElementById("settings-button1");
 const settingsButton2 = document.getElementById("settings-button2");
 const settingsContent = document.getElementById("settings-content");
+const settingsWidthValue = document.getElementById("settings-width-value");
 const activeTextColor = document.getElementById("active-text-color");
 const inactiveTextColor = document.getElementById("inactive-text-color");
 let currentActiveTextColor = "#FFFFFF";
 let currentInactiveTextColor = "#777777"
+let currentSettingsWidth = "50vw";
+
+if (localStorage.getItem("currentSettingsWidth") !== null)
+{
+    currentSettingsWidth = localStorage.getItem("currentSettingsWidth");
+    settingsWidthValue.value = currentSettingsWidth;
+    settingsContent.style.width = `calc(${currentSettingsWidth} - 4rem)`;
+    settingsContent.style.marginLeft = `calc(100vw - ${currentSettingsWidth})`;
+}
 
 if (localStorage.getItem("currentActiveTextColor") !== null)
 {
@@ -167,6 +177,16 @@ inactiveTextColor.onkeydown = function (event) {
         {
             text[i].style.color = this.value;
         }
+    }
+}
+
+settingsWidthValue.onkeydown = function (event) {
+    if (event.key == "Enter")
+    {
+        localStorage.setItem('currentSettingsWidth', this.value);
+        currentSettingsWidth = this.value;
+        settingsContent.style.width = `calc(${currentSettingsWidth} - 4rem)`;
+        settingsContent.style.marginLeft = `calc(100vw - ${currentSettingsWidth})`;
     }
 }
 

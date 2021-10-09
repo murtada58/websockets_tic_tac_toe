@@ -162,10 +162,10 @@ p {
     display: none;
     position: absolute;
     z-index: 2;
-    width: calc(100vw - 4em);
-    height: calc(100vh - 4em);
+    width: calc(70vw - 4rem);
+    height: calc(100vh - 4rem);
     grid-template-rows: auto 1fr;
-    
+    margin-left: calc(100vw - 70vw);
 
     #settings-bar {
         display: grid;
