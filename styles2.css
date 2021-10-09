@@ -421,6 +421,10 @@ body #game #game-chat {
     font-size: calc((100vw - 8rem) / 5);
     line-height: calc((100vw - 8rem) / 5);
   }
+  body #game #tictactoe #game-board div:hover {
+    cursor: default;
+    opacity: 1;
+  }
   body #game #game-chat {
     display: none;
   }

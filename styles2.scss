@@ -361,6 +361,11 @@ body {
                         height: calc((100vw - 8rem) / 5);
                         font-size: calc((100vw - 8rem) / 5);
                         line-height: calc((100vw - 8rem) / 5);
+
+                        &:hover {
+                            cursor: default;
+                            opacity: 1;
+                        }
                     }
                 }
             }
