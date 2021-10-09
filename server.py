@@ -8,6 +8,7 @@ import ssl
 import websockets
 from datetime import datetime
 import random
+import colorsys
 
 SERVER_IP = "176.58.109.37" # set to "localhost" or your servers ip if you want to host your own server
 PORT = 6789
@@ -69,7 +70,6 @@ async def remove_from_game(websocket):
                         USERS_DATA[user]["game"] = None
             GAMES[USERS_DATA[websocket]["game"]]["users"].remove(websocket)
             USERS_DATA[websocket]["game"] = None
-    
 
 def validate(user, num):
     if USERS_DATA[user]["game"] not in GAMES:
@@ -156,13 +156,15 @@ def won(user, board):
     
     return False
 
+def hsv2rgb(h,s,v):
+    return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 async def game(websocket, path):
     global new_game_id
     global new_user_id
     try:
         USERS.add(websocket)
-        color = "#" + "".join(["0123456789ABCD"[random.randint(0, 13)] for _ in range(6)])
+        color = f"rgb{hsv2rgb(random.random(), random.random(), 0.5 + (random.random() * 0.5))}"
         USERS_DATA[websocket] = {"game": None, "name": "Guest", "id": f"#{new_user_id}", "color": color}
         new_user_id += 1
         websockets.broadcast(USERS, users_event())
