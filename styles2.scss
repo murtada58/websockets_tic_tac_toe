@@ -59,7 +59,7 @@ p {
         "time";
     
     height: min-content;
-    justify-self: end;
+    align-self: flex-end;
     
     margin: 0.5rem 3.5rem;
     margin-right: 1rem;
@@ -91,7 +91,7 @@ p {
         "message"
         "time";
         height: min-content;
-    justify-self: start;
+    align-self: flex-start;
 
     margin: 0.5rem 0.5rem;
     margin-right: 4rem;
@@ -136,9 +136,11 @@ p {
 
     .chat-messages {
         grid-area: messages;
-        display: grid;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
         overflow-y: scroll;
-        grid-template-rows: repeat(100000, auto);
+        
         height: calc(100vh - 3em - 15.5rem);
         margin-top: 0.75rem;
     }
@@ -151,6 +153,15 @@ p {
         text-align: left;
         padding: 1rem 0.5rem;
     }
+}
+
+#settings-content {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    width: calc(100vw - 4em);
+    height: calc(100vh - 4em);
+    padding: 1em;
 }
 
 body {
@@ -204,7 +215,7 @@ body {
                 display: inline-block;
             }
     
-            #settings {
+            #settings-button {
                 display: inline-block;
                 width: 2.5rem;
                 height: 2.5rem;
@@ -234,9 +245,8 @@ body {
 
         #active-games-games {
             grid-area: games;
-            display: grid;
+            display: block;
             overflow-y: scroll;
-            grid-template-rows: repeat(100000, auto);
             height: calc(100vh - 3em - 15.5rem);
             margin-top: 0.75rem;
 
@@ -301,7 +311,6 @@ body {
                 grid-area: board;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
-                grid-template-rows: repeat(10000, auto);
                 align-content: center;
                 justify-items: center;
                 margin: 1em 0;

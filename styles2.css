@@ -60,8 +60,7 @@ p {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  -ms-grid-column-align: end;
-      justify-self: end;
+  align-self: flex-end;
   margin: 0.5rem 3.5rem;
   margin-right: 1rem;
 }
@@ -98,8 +97,7 @@ p {
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  -ms-grid-column-align: start;
-      justify-self: start;
+  align-self: flex-start;
   margin: 0.5rem 0.5rem;
   margin-right: 4rem;
 }
@@ -153,11 +151,15 @@ p {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: messages;
-  display: -ms-grid;
-  display: grid;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0;
   overflow-y: scroll;
-  -ms-grid-rows: (auto)[100000];
-      grid-template-rows: repeat(100000, auto);
   height: calc(100vh - 3em - 15.5rem);
   margin-top: 0.75rem;
 }
@@ -171,6 +173,15 @@ p {
   height: 1.5rem;
   text-align: left;
   padding: 1rem 0.5rem;
+}
+
+#settings-content {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  width: calc(100vw - 4em);
+  height: calc(100vh - 4em);
+  padding: 1em;
 }
 
 body {
@@ -241,7 +252,7 @@ body #topbar #topbar-right #user-id {
   display: inline-block;
 }
 
-body #topbar #topbar-right #settings {
+body #topbar #topbar-right #settings-button {
   display: inline-block;
   width: 2.5rem;
   height: 2.5rem;
@@ -277,11 +288,8 @@ body #active-games #active-games-games {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: games;
-  display: -ms-grid;
-  display: grid;
+  display: block;
   overflow-y: scroll;
-  -ms-grid-rows: (auto)[100000];
-      grid-template-rows: repeat(100000, auto);
   height: calc(100vh - 3em - 15.5rem);
   margin-top: 0.75rem;
 }
@@ -361,8 +369,6 @@ body #game #tictactoe #game-board {
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr;
       grid-template-columns: 1fr 1fr 1fr;
-  -ms-grid-rows: (auto)[10000];
-      grid-template-rows: repeat(10000, auto);
   -ms-flex-line-pack: center;
       align-content: center;
   justify-items: center;
