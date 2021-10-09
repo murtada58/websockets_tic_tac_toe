@@ -357,10 +357,10 @@ body {
             #tictactoe {
                 #game-board {
                     div {
-                        width: calc((100vw - 4rem) / 4);
-                        height: calc((100vw - 4rem) / 4);
-                        font-size: calc((100vw - 4rem) / 4);
-                        line-height: calc((100vw - 4rem) / 4);
+                        width: calc((100vw - 8rem) / 5);
+                        height: calc((100vw - 8rem) / 5);
+                        font-size: calc((100vw - 8rem) / 5);
+                        line-height: calc((100vw - 8rem) / 5);
                     }
                 }
             }
