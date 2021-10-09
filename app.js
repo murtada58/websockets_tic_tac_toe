@@ -7,9 +7,9 @@ const users = document.getElementById("user-count");
 const createGame = document.getElementById("create-game");
 const leave = document.getElementById("leave");
 const games = document.getElementById("active-games")
-const lobbies = document.getElementById("lobbies");
+const lobbies = document.getElementById("active-games-games");
 const game = document.getElementById("game");
-const turn = document.getElementById("turn");
+const turn = document.getElementById("info");
 const generalChatMessages = document.getElementById("general-chat-messages");
 const generalChatInput = document.getElementById("general-chat-input");
 const gameChatMessages = document.getElementById("game-chat-messages");
@@ -44,6 +44,14 @@ leave.onclick = () => {
 }
 
 usernameInput.onkeydown = function (event) {
+    if (event.key.length == 1)
+    {
+        this.style.width = `${this.value.length + 2}ch`
+    }
+    else if (event.key == 'Backspace' || event.key == 'Delete')
+    {
+        this.style.width = `${this.value.length}ch`
+    }
     if (event.key == 'Enter')
     {
         if (this.value.length <= 16)
@@ -55,6 +63,14 @@ usernameInput.onkeydown = function (event) {
         {
             alert("Please choose a name no longer than 16 characters")
         }
+    }
+}
+
+usernameInput.onkeyup = function (event) {
+    this.style.width = `${this.value.length + 1}ch`
+    if (this.value.length == 0)
+    {
+        this.style.width = `9ch`
     }
 }
 
@@ -79,19 +95,20 @@ gameChatInput.onkeydown = function (event) {
 function addLobby(lobbies, lobbyName, numberOfPlayers)
 {
     const lobby = document.createElement("div");
-    lobby.classList.add("lobby");
+    lobby.classList.add("container");
+    lobby.classList.add("game");
     lobby.dataset.name = lobbyName;
 
     const name = document.createElement("p")
-    name.classList.add("lobby-name");
-    name.textContent = `Lobby: ${lobbyName}`
+    name.classList.add("game-name");
+    name.textContent = `Game: ${lobbyName}`
 
     const users = document.createElement("p")
-    users.classList.add("lobby-users");
+    users.classList.add("game-users");
     users.textContent = `Users: ${numberOfPlayers}/2`
 
     const button = document.createElement("p")
-    button.classList.add("lobby-button");
+    button.classList.add("game-button");
     if (numberOfPlayers < 2)
     {
         button.classList.add("active")
@@ -121,15 +138,7 @@ function addMessage(chat, messasgeContent, name, serverTime, color)
 { 
     const messageName = document.createElement("p");
     console.log(username)
-    if (username + usernameId.textContent == name)
-    {
-        messageName.classList.add("message-name-user");
-    }
-    else 
-    {
-        messageName.classList.add("message-name-stranger");
-    }
-
+    messageName.classList.add("message-name");
     messageName.textContent = name;
     messageName.style.color = color;
 
@@ -143,7 +152,16 @@ function addMessage(chat, messasgeContent, name, serverTime, color)
     messageTime.textContent = localTime;
 
     const messageContainer = document.createElement("div");
-    messageContainer.classList.add("message-container");
+    messageContainer.classList.add("container");
+    
+    if (username + usernameId.textContent == name)
+    {
+        messageContainer.classList.add("message-container-user");
+    }
+    else 
+    {
+        messageContainer.classList.add("message-container-stranger");
+    }
     messageContainer.appendChild(messageName);
     messageContainer.appendChild(message);
     messageContainer.appendChild(messageTime);

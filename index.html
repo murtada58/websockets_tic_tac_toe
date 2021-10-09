@@ -7,67 +7,82 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
     <script src="app.js" defer></script>
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <div id="topbar">
+    <div id="topbar" class="container">
         <h1 id="user-count">0 Users currently online</h1>
 
-        <div id="user">
-            <input id="username" type="text" placeholder="Username">
-            <h1 id="user-id">#123</h1>
+        <div id="topbar-right">
+            <input id="username" class="container" type="text" placeholder="Username">
+            <h1 id="user-id"></h1>
+            <img id="settings" class="button" src="assets/settings_white.svg" alt="settings">
         </div>
     </div>
 
-    <div id="general-chat" class="containers">
-        <h2 id="general-chat-title" class="title" >General Chat</h2>
-        <div id="general-chat-messages" class="contents">
+    <div id="general-chat" class="chat container">
+        <h1 id="general-chat-title" class="chat-title title" >General Chat</h1>
+        <div id="general-chat-messages" class="chat-messages">
  
         </div>
-        <input type="text" id="general-chat-input" placeholder="Type here">
+        <input id="general-chat-input" class="chat-input container" type="text" placeholder="Type here">
     </div>
 
-    <div id="active-games" class="containers">
-        <h2 id="active-games-title" class="title">Active Games</h2>
-        <div id="lobbies" class="contents">
+    <div id="active-games" class="container">
+        <h1 id="active-games-title" class="title">Active Games</h1>
+        <div id="active-games-games">
 
         </div>
+        
+        <h2 id="create-game" class="button container">Create Game</h2>
     </div>
 
 
     <div id="game">
-        <h2 id="turn">Waiting for another player to join</h2>
-        <table >
-            <tbody>
-                <tr>
-                    <td id="0" data-num="0"></td>
-                    <td id="1" data-num="1"></td>
-                    <td id="2" data-num="2"></td>
-                </tr>
-                <tr>
-                    <td id="3" data-num="3"></td>
-                    <td id="4" data-num="4"></td>
-                    <td id="5" data-num="5"></td>
-                </tr>
-                <tr>
-                    <td id="6" data-num="6"></td>
-                    <td id="7" data-num="7"></td>
-                    <td id="8" data-num="8"></td>
-                </tr>
-            </tbody>
-        </table>
-        <div id="game-chat" class="containers">
-            <h2 id="game-chat-title" class="title" >Game Chat</h2>
-            <div id="game-chat-messages" class="contents">
+        <div id="tictactoe" class="container">
+            <h1 id="info">Waiting for another player to join</h1>
+            <div id="game-board">
+                <div id="0" class="container" data-num="0"></div>
+                <div id="1" class="container" data-num="1"></div>
+                <div id="2" class="container" data-num="2"></div>
+                <div id="3" class="container" data-num="3"></div>
+                <div id="4" class="container" data-num="4"></div>
+                <div id="5" class="container" data-num="5"></div>
+                <div id="6" class="container" data-num="6"></div>
+                <div id="7" class="container" data-num="7"></div>
+                <div id="8" class="container" data-num="8"></div>
+            </div>
+            <table id="game-board" style="display: none;">
+                <tbody>
+                    <tr>
+                        <td id="0" class="container" data-num="0"></td>
+                        <td id="1" class="container" data-num="1"></td>
+                        <td id="2" class="container" data-num="2"></td>
+                    </tr>
+                    <tr>
+                        <td id="3" class="container" data-num="3"></td>
+                        <td id="4" class="container" data-num="4"></td>
+                        <td id="5" class="container" data-num="5"></td>
+                    </tr>
+                    <tr>
+                        <td id="6" class="container" data-num="6"></td>
+                        <td id="7" class="container" data-num="7"></td>
+                        <td id="8" class="container" data-num="8"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 id="leave" class="button container">Leave game</h2>
+        </div>
+
+        <div id="game-chat" class="chat container">
+            <h1 id="game-chat-title" class="chat-title title" >Game Chat</h1>
+            <div id="game-chat-messages" class="chat-messages contents">
 
             </div>
-            <input type="text" id="game-chat-input" placeholder="Type here">
+            <input id="game-chat-input" class="chat-input container" type="text" placeholder="Type here">
         </div>
     </div>
-
-    <h1 id="create-game">Create Game</h1>
-    <h1 id="leave">Leave game</h1>
 </body>
 </html>

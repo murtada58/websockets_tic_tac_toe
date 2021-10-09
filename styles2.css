@@ -1,0 +1,428 @@
+* {
+  font-family: 'Poppins', sans-serif;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #c9c9c9;
+  border-radius: 20px;
+  background: rgba(111, 111, 111, 0.4);
+  border: #8a8a8a 1px solid;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #3f3f3f;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.25rem;
+}
+
+.container {
+  border: rgba(255, 255, 255, 0.1) 1px solid;
+  border-radius: 1.5em;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1rem 1rem;
+  text-align: center;
+}
+
+.message-container-user {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "name" "message" "time";
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  -ms-grid-column-align: end;
+      justify-self: end;
+  margin: 0.5rem 3.5rem;
+  margin-right: 1rem;
+}
+
+.message-container-user .message-name {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: name;
+  text-align: right;
+}
+
+.message-container-user .message {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: message;
+  text-align: left;
+  overflow-x: auto;
+  overflow-wrap: break-word;
+}
+
+.message-container-user .message-time {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: time;
+  text-align: right;
+  font-size: 1rem;
+  color: #777777;
+}
+
+.message-container-stranger {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "name" "message" "time";
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  -ms-grid-column-align: start;
+      justify-self: start;
+  margin: 0.5rem 0.5rem;
+  margin-right: 4rem;
+}
+
+.message-container-stranger .message-name {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: name;
+  text-align: left;
+}
+
+.message-container-stranger .message {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: message;
+  text-align: left;
+  overflow-x: auto;
+  overflow-wrap: break-word;
+}
+
+.message-container-stranger .message-time {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: time;
+  text-align: right;
+  font-size: 1rem;
+  color: #777777;
+}
+
+.button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.chat {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "title" "messages" "input";
+}
+
+.chat .chat-title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: title;
+  border-bottom: 1px #FFFFFF solid;
+}
+
+.chat .chat-messages {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: messages;
+  display: -ms-grid;
+  display: grid;
+  overflow-y: scroll;
+  -ms-grid-rows: (auto)[100000];
+      grid-template-rows: repeat(100000, auto);
+  height: calc(100vh - 3em - 15.5rem);
+  margin-top: 0.75rem;
+}
+
+.chat .chat-input {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: input;
+  font-size: 1.5rem;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+  text-align: left;
+  padding: 1rem 0.5rem;
+}
+
+body {
+  background-image: url("assets/background.svg");
+  background-size: cover;
+  height: calc(100vh - 2em);
+  padding: 1em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+      grid-template-columns: 1fr 2fr;
+  -ms-grid-rows: auto 1fr;
+      grid-template-rows: auto 1fr;
+      grid-template-areas: "topbar        topbar" "general-chat  content";
+  grid-gap: 1em;
+}
+
+body #topbar {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: topbar;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto auto;
+      grid-template-columns: auto auto;
+      grid-template-areas: "count right";
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body #topbar #user-count {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: count;
+  text-align: left;
+}
+
+body #topbar #topbar-right {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: right;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto auto;
+      grid-template-columns: 1fr auto auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: end;
+}
+
+body #topbar #topbar-right #username {
+  display: inline-block;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 6ch;
+  text-align: center;
+  padding: 1rem 0.5rem;
+}
+
+body #topbar #topbar-right #user-id {
+  display: inline-block;
+}
+
+body #topbar #topbar-right #settings {
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0.25rem 0;
+  margin-left: 1rem;
+}
+
+body #general-chat {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: general-chat;
+}
+
+body #active-games {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: content;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "title" "games" "create";
+}
+
+body #active-games #active-games-title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: title;
+  border-bottom: 1px #FFFFFF solid;
+}
+
+body #active-games #active-games-games {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: games;
+  display: -ms-grid;
+  display: grid;
+  overflow-y: scroll;
+  -ms-grid-rows: (auto)[100000];
+      grid-template-rows: repeat(100000, auto);
+  height: calc(100vh - 3em - 15.5rem);
+  margin-top: 0.75rem;
+}
+
+body #active-games #active-games-games .game {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  margin: 0.5rem 1rem;
+}
+
+body #active-games #active-games-games .game .game-name {
+  -ms-grid-column-align: start;
+      justify-self: start;
+}
+
+body #active-games #active-games-games .game .game-users {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+body #active-games #active-games-games .game .game-button {
+  -ms-grid-column-align: end;
+      justify-self: end;
+}
+
+body #active-games #active-games-games .game .active:hover {
+  cursor: pointer;
+}
+
+body #active-games #active-games-games .game .inactive {
+  color: #777777;
+}
+
+body #active-games #create-game {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: create;
+  line-height: 1.5rem;
+}
+
+body #game {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: content;
+  display: none;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "game game-chat";
+  grid-gap: 1em;
+}
+
+body #game #tictactoe {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: game;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "info" "board" "leave";
+}
+
+body #game #tictactoe #info {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: info;
+}
+
+body #game #tictactoe #game-board {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: board;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: (auto)[10000];
+      grid-template-rows: repeat(10000, auto);
+  -ms-flex-line-pack: center;
+      align-content: center;
+  justify-items: center;
+  margin: 1em 0;
+}
+
+body #game #tictactoe #game-board div {
+  display: -ms-grid;
+  display: grid;
+  width: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+  height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+  font-size: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+  line-height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+  border-radius: 1rem;
+  margin: 0.5rem;
+}
+
+body #game #tictactoe #game-board div:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+body #game #tictactoe #leave {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: leave;
+  line-height: 1.5rem;
+}
+
+body #game #game-chat {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: game-chat;
+}
+
+@media only screen and (max-width: 1100px) {
+  body {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "topbar" "content";
+  }
+  body #topbar #topbar-right {
+    display: none;
+  }
+  body #general-chat {
+    display: none;
+  }
+  body #game {
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        grid-template-areas: "game";
+  }
+  body #game #tictactoe #game-board div {
+    width: calc((100vw - 4rem) / 4);
+    height: calc((100vw - 4rem) / 4);
+    font-size: calc((100vw - 4rem) / 4);
+    line-height: calc((100vw - 4rem) / 4);
+  }
+  body #game #game-chat {
+    display: none;
+  }
+}
+/*# sourceMappingURL=styles2.css.map */

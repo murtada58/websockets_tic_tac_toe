@@ -1,0 +1,373 @@
+* {
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #c9c9c9;
+    border-radius: 20px;
+    background:rgba(111, 111, 111, 0.4);
+    border: #8a8a8a 1px solid;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #3f3f3f;
+    border-radius: 20px;
+    background:rgba(0, 0, 0, 0.4);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background:rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p {
+    font-size: 1.25rem;
+}
+
+.container {
+    border: rgba(255, 255, 255, 0.1) 1px solid;
+    border-radius: 1.5em;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+.message-container-user {
+    display: grid;
+    grid-template-areas: 
+        "name"
+        "message"
+        "time";
+    
+    height: min-content;
+    justify-self: end;
+    
+    margin: 0.5rem 3.5rem;
+    margin-right: 1rem;
+
+    .message-name {
+        grid-area: name;
+        text-align: right;
+    }
+
+    .message {
+        grid-area: message;
+        text-align: left;
+        overflow-x: auto;
+        overflow-wrap: break-word;
+    }
+
+    .message-time {
+        grid-area: time;
+        text-align: right;
+        font-size: 1rem;
+        color: #777777;
+    }
+}
+
+.message-container-stranger {
+    display: grid;
+    grid-template-areas: 
+        "name"
+        "message"
+        "time";
+        height: min-content;
+    justify-self: start;
+
+    margin: 0.5rem 0.5rem;
+    margin-right: 4rem;
+
+    .message-name {
+        grid-area: name;
+        text-align: left;
+    }
+
+    .message {
+        grid-area: message;
+        text-align: left;
+        overflow-x: auto;
+        overflow-wrap: break-word;
+    }
+
+    .message-time {
+        grid-area: time;
+        text-align: right;
+        font-size: 1rem;
+        color: #777777;
+    }
+}
+
+.button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.chat {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+        "title"
+        "messages"
+        "input";
+
+    .chat-title {
+        grid-area: title;
+        border-bottom: 1px #FFFFFF solid;
+    }
+
+    .chat-messages {
+        grid-area: messages;
+        display: grid;
+        overflow-y: scroll;
+        grid-template-rows: repeat(100000, auto);
+        height: calc(100vh - 3em - 15.5rem);
+        margin-top: 0.75rem;
+    }
+
+    .chat-input {
+        grid-area: input;
+        font-size: 1.5rem;
+        border-radius: 0.5rem;
+        height: 1.5rem;
+        text-align: left;
+        padding: 1rem 0.5rem;
+    }
+}
+
+body {
+    background-image: url('assets/background.svg');
+    background-size: cover;
+    height: calc(100vh - 2em);
+    padding: 1em;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "topbar        topbar"
+        "general-chat  content";
+
+    grid-gap: 1em;
+
+    #topbar {
+        grid-area: topbar;
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-areas:
+            "count right";
+    
+        height: min-content;
+        align-items: center;
+    
+        #user-count {
+            grid-area: count;
+            text-align: left;
+        }
+    
+        #topbar-right {
+            grid-area: right;
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            justify-items: end;
+    
+            #username {
+                display: inline-block;
+                font-size: 2rem;
+                border-radius: 0.5rem;
+                height: 1rem;
+                width: 6ch;
+                text-align: center;
+                padding: 1rem 0.5rem;
+            }
+    
+            #user-id {
+                display: inline-block;
+            }
+    
+            #settings {
+                display: inline-block;
+                width: 2.5rem;
+                height: 2.5rem;
+                padding: 0.25rem 0;
+                margin-left: 1rem;
+            }
+        }
+    }
+    
+    #general-chat {
+        grid-area: general-chat;
+    }
+    
+    #active-games {
+        grid-area: content;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: 
+            "title"
+            "games"
+            "create";
+        
+        #active-games-title {
+            grid-area: title;
+            border-bottom: 1px #FFFFFF solid;
+        }
+
+        #active-games-games {
+            grid-area: games;
+            display: grid;
+            overflow-y: scroll;
+            grid-template-rows: repeat(100000, auto);
+            height: calc(100vh - 3em - 15.5rem);
+            margin-top: 0.75rem;
+
+            .game {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                text-align: center;
+                margin: 0.5rem 1rem;
+                
+                .game-name {
+                    justify-self: start;
+                }
+
+                .game-users {
+                    justify-self: center;
+                }
+
+                .game-button {
+                    justify-self: end;
+                }
+                
+                .active:hover {
+                    cursor: pointer;
+                }
+
+                .inactive {
+                    color: #777777;
+                }
+            }
+        }
+        
+        #create-game {
+            grid-area: create;
+            line-height: 1.5rem;
+        }
+    }
+    
+    #game {
+        grid-area: content;
+        display: none;
+
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+            "game game-chat";
+
+        grid-gap: 1em;
+
+        #tictactoe {
+            grid-area: game;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-areas: 
+                "info"
+                "board"
+                "leave";
+
+            #info {
+                grid-area: info;
+            }
+
+            #game-board {
+                grid-area: board;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: repeat(10000, auto);
+                align-content: center;
+                justify-items: center;
+                margin: 1em 0;
+                div {
+                    display: grid;
+                    width: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+                    height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+                    font-size: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+                    line-height: calc((((100vw - 4rem) / 3) - 4rem) / 5);
+                    border-radius: 1rem;
+                    margin: 0.5rem;
+                    &:hover {
+                        cursor: pointer;
+                        opacity: 0.5;
+                    }
+                }
+            }
+
+            #leave {
+                grid-area: leave;
+                line-height: 1.5rem;
+            }
+        }
+
+        #game-chat {
+            grid-area: game-chat;
+        }
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+    body {
+        grid-template-columns: 1fr;
+    grid-template-areas:
+        "topbar"
+        "content";
+    
+        #topbar {
+            
+            #topbar-right {
+                display: none;
+            }
+        }
+
+        #general-chat {
+            display: none;
+        }
+
+        #game {
+            grid-template-columns: 1fr;
+            grid-template-areas: "game";
+            
+            #tictactoe {
+                #game-board {
+                    div {
+                        width: calc((100vw - 4rem) / 4);
+                        height: calc((100vw - 4rem) / 4);
+                        font-size: calc((100vw - 4rem) / 4);
+                        line-height: calc((100vw - 4rem) / 4);
+                    }
+                }
+            }
+
+            #game-chat {
+                display: none;
+            }
+        }
+    }
+}
