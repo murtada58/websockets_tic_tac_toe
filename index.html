@@ -13,78 +13,72 @@
 </head>
 <body>
     <div id="settings-content" class="container">
-        test
+        <div id="settings-bar">
+            <h1 id="settings-title" class="active-text-color">Settings</h1>
+            <img id="settings-button1" class="button" src="assets/settings_white.svg" alt="settings">
+        </div>
+        <div id="settings">
+            <div class="setting container">
+                <h2 class="setting-name active-text-color">Active Text Color</h2>
+                <input id="active-text-color" class="setting-value container active-text-color" type="text" value="#FFFFFF">
+            </div>
+            <div class="setting container">
+                <h2 class="setting-name active-text-color">Inactive Text Color</h2>
+                <input id="inactive-text-color" class="setting-value container active-text-color" type="text" value="#777777">
+            </div>
+        </div>
     </div>
     <div id="topbar" class="container">
-        <h1 id="user-count">0 Users currently online</h1>
+        <h1 id="user-count" class="active-text-color">0 Users currently online</h1>
 
         <div id="topbar-right">
             <input id="username" class="container" type="text" placeholder="Username">
-            <h1 id="user-id"></h1>
-            <img id="settings-button" class="button" src="assets/settings_white.svg" alt="settings">
+            <h1 id="user-id" class="active-text-color"></h1>
+            <img id="settings-button2" class="button" src="assets/settings_white.svg" alt="settings">
         </div>
     </div>
 
     <div id="general-chat" class="chat container">
-        <h1 id="general-chat-title" class="chat-title title" >General Chat</h1>
+        <h1 id="general-chat-title" class="chat-title title active-text-color" >General Chat</h1>
         <div id="general-chat-messages" class="chat-messages">
  
         </div>
-        <input id="general-chat-input" class="chat-input container" type="text" placeholder="Type here">
+        <input id="general-chat-input" class="chat-input container active-text-color" type="text" placeholder="Type here">
     </div>
 
     <div id="active-games" class="container">
-        <h1 id="active-games-title" class="title">Active Games</h1>
+        <h1 id="active-games-title" class="title active-text-color">Active Games</h1>
         <div id="active-games-games">
 
         </div>
         
-        <h2 id="create-game" class="button container">Create Game</h2>
+        <h2 id="create-game" class="button container active-text-color">Create Game</h2>
     </div>
 
 
     <div id="game">
         <div id="tictactoe" class="container">
-            <h1 id="info">Waiting for another player to join</h1>
+            <h1 id="info" class="active-text-color">Waiting for another player to join</h1>
             <div id="game-board">
-                <div id="0" class="container" data-num="0"></div>
-                <div id="1" class="container" data-num="1"></div>
-                <div id="2" class="container" data-num="2"></div>
-                <div id="3" class="container" data-num="3"></div>
-                <div id="4" class="container" data-num="4"></div>
-                <div id="5" class="container" data-num="5"></div>
-                <div id="6" class="container" data-num="6"></div>
-                <div id="7" class="container" data-num="7"></div>
-                <div id="8" class="container" data-num="8"></div>
+                <div id="0" class="container active-text-color" data-num="0"></div>
+                <div id="1" class="container active-text-color" data-num="1"></div>
+                <div id="2" class="container active-text-color" data-num="2"></div>
+                <div id="3" class="container active-text-color" data-num="3"></div>
+                <div id="4" class="container active-text-color" data-num="4"></div>
+                <div id="5" class="container active-text-color" data-num="5"></div>
+                <div id="6" class="container active-text-color" data-num="6"></div>
+                <div id="7" class="container active-text-color" data-num="7"></div>
+                <div id="8" class="container active-text-color" data-num="8"></div>
             </div>
-            <table id="game-board" style="display: none;">
-                <tbody>
-                    <tr>
-                        <td id="0" class="container" data-num="0"></td>
-                        <td id="1" class="container" data-num="1"></td>
-                        <td id="2" class="container" data-num="2"></td>
-                    </tr>
-                    <tr>
-                        <td id="3" class="container" data-num="3"></td>
-                        <td id="4" class="container" data-num="4"></td>
-                        <td id="5" class="container" data-num="5"></td>
-                    </tr>
-                    <tr>
-                        <td id="6" class="container" data-num="6"></td>
-                        <td id="7" class="container" data-num="7"></td>
-                        <td id="8" class="container" data-num="8"></td>
-                    </tr>
-                </tbody>
-            </table>
-            <h2 id="leave" class="button container">Leave game</h2>
+            <h2 id="leave" class="button container active-text-color">Leave game</h2>
         </div>
 
         <div id="game-chat" class="chat container">
-            <h1 id="game-chat-title" class="chat-title title" >Game Chat</h1>
-            <div id="game-chat-messages" class="chat-messages contents">
+            <h1 id="game-chat-title" class="chat-title title active-text-color" >Game Chat</h1>
+            <div id="game-chat-messages" class="chat-messages contents active-text-color">
 
             </div>
-            <input id="game-chat-input" class="chat-input container" type="text" placeholder="Type here">
+            <input id="game-chat-input" class="chat-input container active-text-color" type="text" placeholder="Type here">
         </div>
     </div>
 </body>

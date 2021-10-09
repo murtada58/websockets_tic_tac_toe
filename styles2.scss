@@ -1,6 +1,5 @@
 * {
     font-family: 'Poppins', sans-serif;
-    color: #FFFFFF;
     margin: 0;
 }
 
@@ -39,6 +38,10 @@ h2 {
 
 p {
     font-size: 1.25rem;
+}
+
+.active-text-color {
+    color: #FFFFFF;
 }
 
 .container {
@@ -161,7 +164,53 @@ p {
     z-index: 2;
     width: calc(100vw - 4em);
     height: calc(100vh - 4em);
-    padding: 1em;
+    grid-template-rows: auto 1fr;
+    
+
+    #settings-bar {
+        display: grid;
+        text-align: center;
+        grid-template-columns: 1fr auto;
+
+        #settings-button1 {
+            justify-self: end;
+            display: inline-block;
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0.25rem 0;
+            margin-left: 1rem;
+        }
+    
+    }
+
+    #settings {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow-y: scroll;
+        padding: 1em;
+
+        .setting {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+
+            .setting-name {
+                justify-self: start;
+            }
+
+            .setting-value {
+                display: inline-block;
+                justify-self: end;
+                font-size: 2rem;
+                border-radius: 0.5rem;
+                height: 1rem;
+                width: 8ch;
+                text-align: center;
+                padding: 1rem 0.5rem;
+            }
+        }
+    }
 }
 
 body {
@@ -215,7 +264,7 @@ body {
                 display: inline-block;
             }
     
-            #settings-button {
+            #settings-button2 {
                 display: inline-block;
                 width: 2.5rem;
                 height: 2.5rem;

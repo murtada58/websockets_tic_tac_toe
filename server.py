@@ -169,13 +169,13 @@ async def game(websocket, path):
         new_user_id += 1
         websockets.broadcast(USERS, users_event())
         await websocket.send(game_event())
-        await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"]}))
+        await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"], "color": USERS_DATA[websocket]["color"]}))
 
         async for message in websocket:
             data = json.loads(message)
             if data["action"] == "name_change":
                 USERS_DATA[websocket]["name"] = data["name"]
-                await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"]}))
+                await websocket.send(json.dumps({"type": "name", "name": USERS_DATA[websocket]["name"], "id": USERS_DATA[websocket]["id"], "color": USERS_DATA[websocket]["color"]}))
                 
             elif data["action"] == "message":
                 time = datetime.now().strftime('%I:%M:%p')

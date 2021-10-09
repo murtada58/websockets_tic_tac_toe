@@ -16,6 +16,35 @@ const gameChatMessages = document.getElementById("game-chat-messages");
 const gameChatInput = document.getElementById("game-chat-input");
 const usernameInput = document.getElementById("username");
 const usernameId = document.getElementById("user-id");
+const settingsButton1 = document.getElementById("settings-button1");
+const settingsButton2 = document.getElementById("settings-button2");
+const settingsContent = document.getElementById("settings-content");
+const activeTextColor = document.getElementById("active-text-color");
+const inactiveTextColor = document.getElementById("inactive-text-color");
+let currentActiveTextColor = "#FFFFFF";
+let currentInactiveTextColor = "#777777"
+
+if (localStorage.getItem("currentActiveTextColor") !== null)
+{
+    currentActiveTextColor = localStorage.getItem("currentActiveTextColor")
+    activeTextColor.value = currentActiveTextColor
+    const text = document.querySelectorAll(".active-text-color")
+    for (i = 0; i < text.length; i++)
+    {
+        text[i].style.color = currentActiveTextColor;
+    }
+}
+
+if (localStorage.getItem("currentInactiveTextColor") !== null)
+{
+    currentInactiveTextColor = localStorage.getItem("currentInactiveTextColor")
+    inactiveTextColor.value = currentInactiveTextColor
+    const text = document.querySelectorAll(".inactive-text-color")
+    for (i = 0; i < text.length; i++)
+    {
+        text[i].style.color = currentInactiveTextColor;
+    }
+}
 
 let username = "Guest"
 usernameInput.value = username;
@@ -27,6 +56,7 @@ for (i=0; i<9; i++)
         websocket.send(JSON.stringify({action: 'update', num: this.dataset.num}));
     }
 }
+
 createGame.onclick = () => {
     websocket.send(JSON.stringify({action: 'create'}));
     games.style.display = "none"
@@ -92,6 +122,54 @@ gameChatInput.onkeydown = function (event) {
     }
 }
 
+settingsButton1.onclick = function () {
+    if (settingsContent.style.display == "grid")
+    {
+        settingsContent.style.display = "none"
+    }
+    else 
+    {
+        settingsContent.style.display = "grid"
+    }
+}
+
+settingsButton2.onclick = function () {
+    if (settingsContent.style.display == "grid")
+    {
+        settingsContent.style.display = "none"
+    }
+    else 
+    {
+        settingsContent.style.display = "grid"
+    }
+}
+
+activeTextColor.onkeydown = function (event) {
+    if (event.key == "Enter")
+    {
+        localStorage.setItem('currentActiveTextColor', this.value);
+        currentActiveTextColor = this.value;
+        const text = document.querySelectorAll(".active-text-color")
+        for (i = 0; i < text.length; i++)
+        {
+            text[i].style.color = this.value;
+        }
+    }
+}
+
+inactiveTextColor.onkeydown = function (event) {
+    if (event.key == "Enter")
+    {
+        localStorage.setItem('currentInactiveTextColor', this.value);
+        currentInactiveTextColor = this.value;
+        const text = document.querySelectorAll(".inactive-text-color")
+        for (i = 0; i < text.length; i++)
+        {
+            text[i].style.color = this.value;
+        }
+    }
+}
+
 function addLobby(lobbies, lobbyName, numberOfPlayers)
 {
     const lobby = document.createElement("div");
@@ -101,10 +179,14 @@ function addLobby(lobbies, lobbyName, numberOfPlayers)
 
     const name = document.createElement("p")
     name.classList.add("game-name");
+    name.classList.add("active-text-color");
+    name.style.color = currentActiveTextColor;
     name.textContent = `Game: ${lobbyName}`
 
     const users = document.createElement("p")
     users.classList.add("game-users");
+    users.classList.add("active-text-color");
+    users.style.color = currentActiveTextColor;
     users.textContent = `Users: ${numberOfPlayers}/2`
 
     const button = document.createElement("p")
@@ -112,11 +194,15 @@ function addLobby(lobbies, lobbyName, numberOfPlayers)
     if (numberOfPlayers < 2)
     {
         button.classList.add("active")
+        button.classList.add("active-text-color");
+        button.style.color = currentActiveTextColor;
         button.textContent = "Join"
     }
     else
     {
         button.classList.add("inactive")
+        button.classList.add("inactive-text-color");
+        button.style.color = currentInactiveTextColor;
         button.textContent = "Full"
     }
     button.onclick = () => {
@@ -144,10 +230,14 @@ function addMessage(chat, messasgeContent, name, serverTime, color)
 
     const message = document.createElement("p");
     message.classList.add("message");
+    message.classList.add("active-text-color");
+    message.style.color = currentActiveTextColor;
     message.textContent = messasgeContent;
 
     const messageTime = document.createElement("p");
     messageTime.classList.add("message-time");
+    messageTime.classList.add("inactive-text-color");
+    messageTime.style.color = currentInactiveTextColor;
     const localTime = new Intl.DateTimeFormat('en-US', {hour: 'numeric', minute: 'numeric', hour12: true}).format(new Date())
     messageTime.textContent = localTime;
 
@@ -206,6 +296,7 @@ websocket.onmessage = function (event) {
             username = data.name;
             console.log(username)
             usernameInput.value = data.name;
+            usernameInput.style.color = data.color;
             break;
 
         case 'lobby':
@@ -218,8 +309,10 @@ websocket.onmessage = function (event) {
             }
             if (number_of_lobbies == 0)
             {
-                const empty_message = document.createElement("h3")
+                const empty_message = document.createElement("h2")
                 empty_message.textContent = "There are currently no active games"
+                empty_message.classList.add("active-text-color");
+                empty_message.style.color = currentActiveTextColor;
                 lobbies.appendChild(empty_message)
             }
             break;
