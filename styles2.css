@@ -230,6 +230,7 @@ p {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background: rgba(204, 204, 204, 0.3);
 }
 
 #settings-content #settings .setting .setting-name {
@@ -247,6 +248,7 @@ p {
   width: 8ch;
   text-align: center;
   padding: 1rem 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 body {

@@ -196,6 +196,7 @@ p {
             display: grid;
             grid-template-columns: 1fr 1fr;
             align-items: center;
+            background: rgba(204, 204, 204, 0.3);
 
             .setting-name {
                 justify-self: start;
@@ -210,6 +211,7 @@ p {
                 width: 8ch;
                 text-align: center;
                 padding: 1rem 0.5rem;
+                background: rgba(0, 0, 0, 0.8);
             }
         }
     }
