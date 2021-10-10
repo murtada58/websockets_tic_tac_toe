@@ -25,6 +25,7 @@ const inactiveTextColor = document.getElementById("inactive-text-color");
 let currentActiveTextColor = "#FFFFFF";
 let currentInactiveTextColor = "#777777"
 let currentSettingsWidth = "50vw";
+let enemyJoined = false;
 
 if (localStorage.getItem("currentSettingsWidth") !== null)
 {
@@ -62,8 +63,10 @@ usernameInput.value = username;
 for (i=0; i<9; i++)
 {
     document.getElementById(i).onclick = function () {
-        console.log(this.dataset.num);
-        websocket.send(JSON.stringify({action: 'update', num: this.dataset.num}));
+        if (this.textContent === "" & enemyJoined)
+        {
+            websocket.send(JSON.stringify({action: 'update', num: this.dataset.num}));
+        }
     }
 }
 
@@ -359,6 +362,7 @@ websocket.onmessage = function (event) {
             empty_message.textContent = "Enemy Joined"
             gameChatMessages.appendChild(empty_message)
             gameChatMessages.scrollTop = gameChatMessages.scrollHeight
+            enemyJoined = true;
             break;
             
         case 'enemy_leave':
@@ -366,6 +370,7 @@ websocket.onmessage = function (event) {
             empty_message.textContent = "Enemy left"
             gameChatMessages.appendChild(empty_message)
             gameChatMessages.scrollTop = gameChatMessages.scrollHeight
+            enemyJoined = false;
             break;
 
         case 'update':
@@ -373,7 +378,6 @@ websocket.onmessage = function (event) {
             {
                 document.getElementById(i).textContent = data.board[i]
             }
-
             if (data.turn == "wait")
             {
                 turn.textContent = "Waiting for someone to join"
