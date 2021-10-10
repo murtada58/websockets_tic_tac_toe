@@ -46,7 +46,7 @@ p {
 
 .container {
   border: rgba(255, 255, 255, 0.1) 1px solid;
-  border-radius: 1.5em;
+  border-radius: 1.5rem;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
   background: rgba(0, 0, 0, 0.3);
@@ -163,7 +163,7 @@ p {
           flex-direction: column;
   gap: 0;
   overflow-y: scroll;
-  height: calc(100vh - 3em - 15.5rem);
+  height: calc(100vh - 18.5rem);
   margin-top: 0.75rem;
 }
 
@@ -252,8 +252,8 @@ p {
 body {
   background-image: url("assets/background.png");
   background-size: cover;
-  height: calc(100vh - 2em);
-  padding: 1em;
+  height: calc(100vh - 2rem);
+  padding: 1rem;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 2fr;
@@ -261,7 +261,7 @@ body {
   -ms-grid-rows: auto 1fr;
       grid-template-rows: auto 1fr;
       grid-template-areas: "topbar        topbar" "general-chat  content";
-  grid-gap: 1em;
+  grid-gap: 1rem;
 }
 
 body #topbar {
@@ -355,7 +355,7 @@ body #active-games #active-games-games {
   grid-area: games;
   display: block;
   overflow-y: scroll;
-  height: calc(100vh - 3em - 15.5rem);
+  height: calc(100vh - 18.5rem);
   margin-top: 0.75rem;
 }
 
@@ -406,7 +406,7 @@ body #game {
   -ms-grid-columns: 1fr 1fr;
       grid-template-columns: 1fr 1fr;
       grid-template-areas: "game game-chat";
-  grid-gap: 1em;
+  grid-gap: 1rem;
 }
 
 body #game #tictactoe {
@@ -437,7 +437,7 @@ body #game #tictactoe #game-board {
   -ms-flex-line-pack: center;
       align-content: center;
   justify-items: center;
-  margin: 1em 0;
+  margin: 1rem 0;
 }
 
 body #game #tictactoe #game-board div {
