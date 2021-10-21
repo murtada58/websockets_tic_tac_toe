@@ -26,7 +26,7 @@ let currentActiveTextColor = "#FFFFFF";
 let currentInactiveTextColor = "#777777"
 let currentSettingsWidth = "50vw";
 let enemyJoined = false;
-let tie = false;
+let gameOver = false;
 
 if (localStorage.getItem("currentSettingsWidth") !== null)
 {
@@ -64,9 +64,9 @@ usernameInput.value = username;
 for (i=0; i<9; i++)
 {
     document.getElementById(i).onclick = function () {
-        if ((this.textContent === "" & enemyJoined) || tie)
+        if ((this.textContent === "" & enemyJoined) || gameOver)
         {
-            tie = false;
+            gameOver = true;
             websocket.send(JSON.stringify({action: 'update', num: this.dataset.num}));
         }
     }
@@ -399,11 +399,12 @@ websocket.onmessage = function (event) {
             }
             else if (data.outcome == 'tie')
             {
-                tie = true;
+                gameOver = true;
                 turn.textContent = "Tie, Click on any cell to restart"
             }
             else
             {
+                gameOver = true;
                 turn.textContent = `You ${data.outcome}, Click on any cell to restart`
             }
 
